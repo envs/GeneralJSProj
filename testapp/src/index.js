@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import "./index.css";
 //import App from './App';
@@ -50,31 +50,96 @@ function SetCell({ lakes }) {
 
 function StateChange() {
   const [status, setStatus] = useState("Open");
+  const [manager, setManager] = useState("Alex");
   return (
-    <div>
-      <h1>Status: {status}</h1>
-      <button onClick={() => setStatus("Open")}>
-        Open
-      </button>
-      <button onClick={() => setStatus("Back in 5")}>
-        Break
-      </button>
-      <button onClick={() => setStatus("Closed")}>
-        Closed
-      </button>
-    </div>
+    <>
+      <div>
+        <h1>Manager on Duty: {manager}</h1>
+        <button onClick={() => setManager("Rachael")}>
+          New Manager
+        </button>
+        <button onClick={() => setManager("Alex")}>
+          Previous Manager
+        </button>
+      </div>
+      <div>
+        <h1>Status: {status}</h1>
+        <button onClick={() => setStatus("Open")}>
+          Open
+        </button>
+        <button onClick={() => setStatus("Back in 5")}>
+          Break
+        </button>
+        <button onClick={() => setStatus("Closed")}>
+          Closed
+        </button>
+      </div>
+    </>
   );
+}
+
+function EffectDemo() {
+
+  const [val, setVal] = useState("");
+  const [val2, setVal2] = useState("");
+
+  useEffect(() => {
+    console.log(`field 1: ${val}`)
+  }, [val]);
+  useEffect(() => {
+    console.log(`field 2: ${val2}`)
+  }, [val2]);
+
+  return(
+    <>
+      <br />
+      <br />
+      <div>
+        <label>
+          First TextArea: 
+          <input value={val.toString()} onChange={e => setVal(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Second TextArea: 
+          <input value={val2.toString()} onChange={e => setVal2(e.target.value)} />
+        </label>
+      </div>
+    </>
+  );
+}
+
+function GitHubUser({ login }) {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    fetch(`https://api.github.com/users/${login}`)
+      .then(res => res.json())
+      .then(setData)
+      .catch(console.error);
+  }, [login]);
+
+  if (data) {
+    return (
+      <div>
+        <h2>{data.login}</h2>
+        <img src={data.avatar_url} width={100} alt=""/>
+      </div>
+    );
+  }
+  return null;
 }
 
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <>  // This is React Fragment
+    <>
       <Hello prolib="Probot" result="stuffs" />
       <Appcell lakes={lakeList}/>
       <SetCell lakes={lakeSet}/>
       <StateChange />
+      <EffectDemo />
+      <GitHubUser login="envs"/>
     </>
   </React.StrictMode>,
   document.querySelector("#root")
