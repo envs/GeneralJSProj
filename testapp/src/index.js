@@ -96,12 +96,12 @@ function EffectDemo() {
       <br />
       <div>
         <label>
-          First TextArea: 
+          First Statement: 
           <input value={val.toString()} onChange={e => setVal(e.target.value)} />
         </label>
         <br />
         <label>
-          Second TextArea: 
+          Second Statement: 
           <input value={val2.toString()} onChange={e => setVal2(e.target.value)} />
         </label>
       </div>
