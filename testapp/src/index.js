@@ -135,11 +135,11 @@ ReactDOM.render(
   <React.StrictMode>
     <>
       <Hello prolib="Probot" result="stuffs" />
-      <Appcell lakes={lakeList}/>
-      <SetCell lakes={lakeSet}/>
+      <Appcell lakes={lakeList} />
+      <SetCell lakes={lakeSet} />
       <StateChange />
       <EffectDemo />
-      <GitHubUser login="envs"/>
+      <GitHubUser login="envs" />
     </>
   </React.StrictMode>,
   document.querySelector("#root")
