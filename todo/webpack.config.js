@@ -5,6 +5,11 @@ const webpack = require('webpack');
 // OLD      $ npx webpack-dev-server --mode development
 // NEW  $ npx webpack serve     OR      $  npx webpack serve --env mode
 
+// Instead of running the above from the terminal everytime, just configure 
+// this in package.json under "scripts":
+// "dev": "npx webpack serve --mode development --env development"
+// Then run this at the terminal    $ npm run dev
+
 module.exports = {
     entry: './src/index.js',
     mode: 'development',
